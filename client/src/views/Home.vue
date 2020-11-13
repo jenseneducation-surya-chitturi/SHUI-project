@@ -1,22 +1,34 @@
 <template>
   <div class="home">
-  <h1>SHUI</h1>
+   <header>
+     <img :src="require('@/assets/header-logo.png')" alt=""/>
+     </header> 
+   <section>
+      <img
+      :src="require('@/assets/app-logo.png')"
+      alt="icon"
+      @click="$router.push('/login')"
+    />
+    <p>FLOW FREELY</p>
+   </section>
+<footer>
+<img :src="require('@/assets/footer.png')">
+</footer>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-
-
 export default {
   name: 'Home',
   components: {
   }
 }
 </script>
+<style scoped>
+.home{
+background-color:darkblue;
 
-<style>
-.home {
-  background-color : blue;
+}
+p{
+  color:white;
 }
 </style>
