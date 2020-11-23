@@ -6,8 +6,8 @@ require('dotenv').config()
 
 
 module.exports = {
-    async register(credentials) {
-      const { username, password, repeatPassword } = credentials;
+    async register(body) {
+      const { username, password, repeatPassword } = body;
       if (username == "" || password == "" || repeatPassword == "") return;
       const user = await users.findOne({ username });
       if (user) return;
@@ -29,8 +29,8 @@ module.exports = {
     };
   },
   
-    async login(credentials) {
-      const { username, password } = credentials;
+    async login(body) {
+      const { username, password } = body;
       if (username == "" || password == "") return;
       const user = await users.findOne({ username });
       console.log(user)
@@ -50,6 +50,6 @@ module.exports = {
       };
     },
     async deleteUser(userID) {
-      return await dbUsers.remove({ _id: userID })
+      return await users.remove({ _id: userID })
     }
   }; 

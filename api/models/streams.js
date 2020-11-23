@@ -26,12 +26,25 @@ module.exports = {
 
                 content: cryptr.decrypt(stream.content),
                 tag: stream.tag,
-                date:  stream.date
+                date:  stream.date,
+                id: stream._id
             }
+            console.log(streamRea)
             return streamRea
         })
         console.log("data collected", newStream)
         return newStream
     },
-    streamsDB
+    streamsDB,
+
+    async removeStream(streams) {
+        console.log(streams)
+        const product = await streamsDB.remove({ _id: streams.id })
+        console.log(product)
+        return product > 0
+    },
+    async removeAllStreams() {
+        const product = await streamsDB.remove({},)
+        return product > 0
+    },
 }

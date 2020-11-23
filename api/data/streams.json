@@ -1,0 +1,22 @@
+{
+    "streams": [
+      {
+        "id": 1,
+        "content": "Saker händer här och där. Elakingar på spårvagnarna vid Brunnsparken. Se till att vara på plats den tiden, var försiktiga.",
+        "tag": ["gothenburg"],
+        "date": "måndag 3 Nov, 09:23"
+      },
+      {
+        "id": 2,
+        "content": "ICA Trumpenten har stängt, jag repeterar. ICA Trumpenten har spelat sitt susta tut! Var försiktiga där ute, detta håller på att balla ur!",
+        "tag": ["boras"],
+        "date": "måndag 3 Nov, 12:21"
+      },
+      {
+        "id": 3,
+        "content": "Undvik Kungsträdgården, där är det massa elakingar. Ta istället den lila linjen ut mot Pluppeberg.",
+        "tag": ["stockholm"],
+        "date": "tisdag 3 Nov, 13:37"
+      }
+    ]
+  }

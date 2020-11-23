@@ -13,23 +13,29 @@ const routes = [
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('../views/Signup.vue')
+    component: () => import( '../views/Signup.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../components/Login.vue')
+    component: () => import( '../components/Login.vue')
   },
-  {
-    path: '/flow',
-    name: 'flow',
-    component: () => import('../views/Flow.vue')
-  },
-  {
-    path: '/settings',
-    name: 'settings',
-    component: () => import('../views/Settings.vue')
-  }
+ {
+  path: '/stream',
+  name: 'Streampage',
+  component: () => import('../views/Streampage.vue')
+},
+{
+  path: '/addstream',
+  name: 'addstream',
+  component: () => import('../components/Addstream.vue')
+},
+{
+  path: '/setting',
+  name: 'setting',
+  component: () => import('../views/Setting.vue')
+},
+
 ]
 
 const router = new VueRouter({

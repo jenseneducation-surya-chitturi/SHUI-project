@@ -1,35 +1,37 @@
 <template>
+<div class="login">
+  <Nav></Nav>
+<div class="content">
+  <img :src="require('@/assets/logo.png')"/>
+   <h1>FLOW FREELY</h1>
+  </div>
+    <div class="login-form">
   <form @submit.prevent="registerUser" >
   <h2>Sign Up</h2>
-  	<p>
-			<label for="Name" class="floatLabel">Name</label>
-			<input id="Name" type="text"  v-model="username">
-		</p>
-		<p>
-			<label for="Email" class="floatLabel">Email</label>
-			<input id="Email"  type="text"  v-model="email">
-		</p>
-		<p>
-			<label for="password" class="floatLabel">Password</label>
-			<input id="password" type="password" v-model="password" >
-		</p>
-		<p>
-			<label for="confirm_password" class="floatLabel">Confirm Password</label>
-			<input id="confirm_password" type="password"  v-model="repeatPassword">
-		</p>
-		<p>
-			<button>signup</button>
-       <router-link to="/login">login</router-link>
-		</p>
-    
+   <div class="form-controls">
+       <input type="text"  id="username" placeholder="userrnamn" v-model="username">
+			<input id="Email"  type="text" placeholder="email" v-model="email">
+			<input id="password" type="password" placeholder="password" v-model="password" >
+			<input id="confirm_password" placeholder="password-repeat" type="password"  v-model="repeatPassword">
+	</div>
+			<button>Signup</button>
+     <button @click="$router.push('/login')">Login</button>
 	</form>
+</div>
+ <Navfooter/>
+</div>
 </template>
 
 <script>
 import axios from "axios"
+import Nav from '../components/Nav/Nav'
+import Navfooter from '../components/Nav/Navfooter'
 export default {
   name: "Signup",
-
+   components: {
+  Nav,
+  Navfooter
+    },
   data() {
     return {
       username: "",
@@ -53,85 +55,65 @@ export default {
       console.log(newUser);
 
       axios.post("http://localhost:5000/api/register", newUser);
-    }
-            
+    }  
   }
   
   },
 };
 </script>
 <style scoped>
-form {
-  background: darkblue;
-  padding: 4em 4em 2em;
-  max-width: 400px;
-  margin: 50px auto 0;
-  box-shadow: 0 0 1em #222;
-  border-radius: 2px;
+.login{
+    background-color:#19274A;
 }
-  h2 {
-    margin:0 0 50px 0;
-    padding:10px;
-    text-align:center;
-    font-size:30px;
-    color:darken(#e5e5e5, 50%);
-    border-bottom:solid 1px #e5e5e5;
-  }
-  p {
-    margin: 0 0 3em 0;
-    position: relative;
-  }
+h1{
+  color:rgba(0, 178, 255, 0.8);
+}
+.content{
+   position: relative;
+  padding-top:5%;
+}
+form {
+  background-color:#19274A;
+  display: grid;
+  width: 300px;
+  margin-left: 480px;
+}
   input {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    outline: none;
-    margin:0;
-  }
-  input[type="text"],
-  input[type="password"] {
-    background: #fff;
-    border: 1px solid #dbdbdb;
-    font-size: 1.2em;
-    padding: .8em .5em;
-    border-radius: 2px;
-  }
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    background: #fff
-  }
-  input[type="submit"] {
-    background: rgba(148,186,101,0.7);
-    box-shadow: 0 3px 0 0 darken(rgba(148,186,101,0.7), 10%);
-    border-radius: 2px;
-    border: none;
+    margin: 10px;
+    height: 50px;
+    text-align: center;
     color: #fff;
-    cursor: pointer;
-    display: block;
-    font-size: 2em;
-    margin: 1em 0 0;
-    outline: none;
-    padding: .4em 0;
-    text-shadow: 0 1px #68B25B;
+    border-radius: 4px;
+    border: 2px solid #fff;
+    font-family: PT Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 31px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    background: transparent;
   }
-  input[type="submit"]:hover {
-    background: rgba(148,175,101,1);
-    text-shadow:0 1px 3px darken(rgba(148,186,101,0.7), 30%);
-  }
-  label{
-    position: absolute;
-    left: 8px;
-    top: 12px;
-    color: #999;
-    font-size: 16px;
-    display: inline-block;
-    padding: 4px 10px;
-    font-weight: 400;
-    background-color: rgba(255,255,255,0);
-  }
-    .floatLabel{
-      top: -11px;
-      background-color: rgba(255,255,255,0.8);
-      font-size: 14px;
+    ::placeholder {
+      color: white;
+      font-family: "PT Sans", sans-serif;
+      letter-spacing: 0.3em;
+      background: transparent;
     }
+  button {
+    height: 50px;
+    margin: 20px;
+    outline: none;
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    font-family: PT Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 31px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+
 </style>

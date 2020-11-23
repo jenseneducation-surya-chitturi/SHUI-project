@@ -22,5 +22,18 @@ router.post("/api/login", async (req, res) => {
         res.send("You are not authorized");
     }
 }); 
+router.delete('/user',  async (req, res) => {
+    if (req.user) {
+        const user = await User.deleteUser(req.user)
+        const streams = await Stream.removeAllStreams(req.user)
+        res.status(200).json({
+            message: "user is deleted"
+        })
+    } else {
+        res.status(400).json({
+            message: 'Unable to delete user'
+        })
+    }
+})
 
 module.exports = router;
