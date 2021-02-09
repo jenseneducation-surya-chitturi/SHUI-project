@@ -2,6 +2,7 @@
     <form @submit.prevent :class="{ show: isForm }">
     <textarea placeholder="Text goes here"></textarea>
     <button>Add</button>
+    <slot/>
   </form>
 
 </template>
@@ -9,6 +10,7 @@
 <script>
 import { computed } from "@vue/composition-api";
 export default {
+    name: "AddStream",
   setup(_, { root }) {
     const isForm = computed(() => root.$store.state.isForm);
     return { isForm };
