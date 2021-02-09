@@ -18,22 +18,23 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import( '../components/Login.vue')
+    component: () => import( '../views/Login.vue')
   },
  {
   path: '/stream',
   name: 'Streampage',
-  component: () => import('../views/Streampage.vue')
+  component: () => import('../views/Streampage.vue'),
+  meta: { requiresAuth: true },
 },
 {
   path: '/addstream',
   name: 'addstream',
-  component: () => import('../components/Addstream.vue')
+  component: () => import('../components/AddStream.vue')
 },
 {
   path: '/setting',
   name: 'setting',
-  component: () => import('../views/Setting.vue')
+  component: () => import('../components/Setting.vue')
 },
 
 ]
@@ -42,6 +43,15 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = sessionStorage.getItem("user");
+  if (to.matched.some((route) => route.meta.requiresAuth && !loggedIn)) {
+    next({ name: "login" });
+  } else {
+    next();
+  }
+});
 
 export default router

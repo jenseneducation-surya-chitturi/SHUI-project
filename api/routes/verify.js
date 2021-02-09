@@ -2,21 +2,17 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = {
-  async verify(req, res, next) {
-    const token = req.headers.authorization;
-    if (!token) {
-      return false;
+  async verifyToken(req, res, next) {
+    const bearerHeader = req.headers.authorization;
+    if (typeof bearerHeader !== "undefined") {
+      const token = bearerHeader.replace("Bearer ", "");
+      if (!token) return;
+      const verifyToken = jwt.verify(token, process.env.SECRET);
+      req.user = verifyToken;
+      next();
     } else {
-      try {
-        const verify = jwt.verify(
-          token.replace("Bearer ", ""),
-          process.env.SECRET
-        );
-        req.user = verify;
-      } catch (error) {
-        console.log(error);
-      }
+      res.status(401);
     }
-    next();
-  }
+  },
 };
+  

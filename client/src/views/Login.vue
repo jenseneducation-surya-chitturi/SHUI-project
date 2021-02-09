@@ -8,10 +8,10 @@
   <div class="login-form">
       <form @submit.prevent="registerUser">
         <div class="form-controls">
-        <input type="text"  id="username" placeholder="Användernamn" v-model="username"><br>
-         <input type="password"  id="password" placeholder="Lösenord" v-model="password">
+        <input type="text"  id="username" placeholder="Username" v-model="username"><br>
+         <input type="password"  id="password" placeholder="Password" v-model="password">
         </div>
-        <button @click="$router.push('/stream')">LogIn</button>
+        <button>LogIn</button>
         <button class ="register"  @click="$router.push('/signup')">Register</button>
       </form>
   </div>
@@ -20,31 +20,42 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Nav from '../components/Nav/Nav'
-import Navfooter from '../components/Nav/Navfooter'
+// import axios from 'axios'
+import Nav from '../components/Nav/Nav';
+import Navfooter from '../components/Nav/Navfooter';
+import useFormSubmit from "@/use/useFormSubmit";
+import { toRefs, reactive } from "@vue/composition-api";
 export default {
   components: {
   Nav,
   Navfooter
     },
-    data(){
-        return {
-                username:'',
-                password:''
-        }
-    },
-     methods: {
-         registerUser(){
-              const newUser = {
-          username: this.username,
-          password: this.password,  
-             };
-      console.log(newUser);
-      axios.post("http://localhost:5000/api/login", newUser);
+
+      setup(_, { root }) {
+    let credentials = reactive({
+      username: null,
+      password: null,
+    });
+    const { registerUser } = useFormSubmit("/api/login", credentials, root);
+    return { ...toRefs(credentials), registerUser };
+  },
+    // data(){
+    //     return {
+    //             username:'',
+    //             password:''
+    //     }
+    // },
+    //  methods: {
+    //      registerUser(){
+    //           const newUser = {
+    //       username: this.username,
+    //       password: this.password,  
+    //          };
+    //   console.log(newUser);
+    //   axios.post("http://localhost:5000/api/login", newUser);
       
-    }
-         }
+    // }
+    //      }
      }
     
 </script>

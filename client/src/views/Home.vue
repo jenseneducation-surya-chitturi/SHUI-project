@@ -3,7 +3,7 @@
     <Nav></Nav>
   <section>
     <img :src="require('@/assets/logo.png')" @click="$router.push('/login')" />
-   <h1>FLOW FREELY</h1>
+   <h1 v-show="!$route.meta.requiresAuth">FLOW FREELY</h1>
   </section>
    <Navfooter/>
   </div>

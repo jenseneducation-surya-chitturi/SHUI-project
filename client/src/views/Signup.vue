@@ -23,16 +23,30 @@
 </template>
 
 <script>
-import axios from "axios"
-import Nav from '../components/Nav/Nav'
-import Navfooter from '../components/Nav/Navfooter'
+// import axios from "axios"
+import Nav from '../components/Nav/Nav';
+import Navfooter from '../components/Nav/Navfooter';
+import useFormSubmit from "@/use/useFormSubmit";
+import { reactive, toRefs } from "@vue/composition-api";
 export default {
   name: "Signup",
    components: {
   Nav,
   Navfooter
     },
-  data() {
+
+setup(_, { root }) {
+    let credentials = reactive({
+      username: null,
+      email:null,
+      password: null,
+      repeatPassword: null,
+    });
+    const { registerUser } = useFormSubmit("/api/register", credentials, root);
+    return { ...toRefs(credentials), registerUser };
+  },
+
+/*   data() {
     return {
       username: "",
       email: "",
@@ -58,7 +72,7 @@ export default {
     }  
   }
   
-  },
+  }, */
 };
 </script>
 <style scoped>
